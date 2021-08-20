@@ -1,6 +1,7 @@
 {
   "name": "malaysian-cabinet",
   "version": "0.1.0",
+  "homepage" : "https://im28.github.io/malaysian-cabinet/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",
