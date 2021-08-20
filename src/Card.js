@@ -7,15 +7,17 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { messageService } from './_services'
 
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { candidates } from './data'
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 205,
-        minWidth: 205,
-        //minHeight: 180
+        width: "100%",
+        height: 210
     },
     media: {
-        height: 80,
+        //height: 80,
     },
 });
 
@@ -25,6 +27,7 @@ export const MediaCard = ({ noImage, role }) => {
     const [name, setName] = useState("");
     const [image, setImage] = useState("whiteBG.png");
     const classes = useStyles();
+    const [selectedCandidate, setSelectedCandidate] = useState("");
     useEffect(() => {
         // subscribe to home component messages
         const subscription = messageService.onMessageReceive(role).subscribe(message => {
@@ -51,9 +54,9 @@ export const MediaCard = ({ noImage, role }) => {
             // />
             return <div>
                 <img src={"./Candidates/" + image} style={{
-                    objectFit: "cover", /* Do not scale the image */
+                    objectFit: "contain", /* Do not scale the image */
                     objectPosition: "center", /* Center the image within the element */
-                    height: "100px",
+                    height: "6rem",
                     width: "100%",
                 }} alt={image} />
             </div>
@@ -70,14 +73,43 @@ export const MediaCard = ({ noImage, role }) => {
             <Card className={classes.root}>
 
                 {showImage()}
-                <CardContent>
-                    <Typography gutterBottom variant="h6" component="h4">
+                <Autocomplete
+                    id="combo-box-demo"
+                    size={'small'}
+                    onChange={(e, v) => {
+                        if (v !== null) {
+                            setName(v.name);
+                            setImage(v.imageURL);
+                        }
+
+
+                    }}
+                    fullWidth={true}
+                    //inputValue={selectedCandidate}
+                    options={candidates}
+                    getOptionLabel={(option) => option.name}
+
+                    style={{ width: "100%" }}
+                    renderInput={(params) => <TextField {...params} label="Candidate" variant="outlined" />}
+                />
+                <Typography variant="caption" color="textSecondary" component="p">
+                    {role}
+                </Typography>
+                <CardContent style={{
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                    flexDirection: "column",
+
+                }}>
+                    {/* <Typography gutterBottom variant="h6" component="h4">
                         {name}
-                    </Typography>
-                    <Typography variant="caption" color="textSecondary" component="p">
-                        {role}
-                    </Typography>
+                    </Typography> */}
+
+
                 </CardContent>
+
+
 
             </Card>
         </div>

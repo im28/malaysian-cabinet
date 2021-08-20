@@ -24,9 +24,9 @@ export const minsters = [
     "Minister of Domestic Trade and Consumer Affairs",
     "Minister of Plantation Industries and Commodities",
     "Minister of Women, Family and Community Development",
-    "Minister of Entrepreneurship Development and Cooperative",
-    "Coordinating Minister of the National Recovery Plan Program",
-    "Coordinating Minister of the National COVID-19 Immunization Program",
+    "Minister of Entrepreneurship Development",
+    "Minister of the National Recovery Plan Program",
+    "Minister of the National COVID-19 Immunization Program",
 ]
 export const Senior = [
     "Security and Unity",
